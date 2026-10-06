@@ -1,43 +1,54 @@
 import std;
 using namespace std;
-// simple Date (many people prefer implementation details last)
-class Date
+
+class Vector
 {
-public:
-    Date(int y, int m, int d); // constructor: check for valid date and initialize
-
-    void add_day(int n); // increase the Date by n days
-    int month();
-    void print() const;
-    // ...
-
+    // Private data members
 private:
-    int y, m, d; // year, month, day
+    int x, y;
+
+    // Public member functions
+public:
+    Vector(int x, int y)
+        : x{x}, y{y}
+    {
+    }
+
+    int get_x() const { return x; }
+    int get_y() const { return y; }
 };
 
-Date::Date(int yy, int mm, int dd) // constructor
-    : y{yy}, m{mm}, d{dd}          // note: member initializers
+// Overloaded operators
+Vector operator+(const Vector &a, const Vector &b)
 {
+    return Vector{a.get_x() + b.get_x(), a.get_y() + b.get_y()};
 }
 
-void Date::add_day(int n)
+Vector operator-(const Vector &a, const Vector &b)
 {
-    d += n;
+    return Vector{a.get_x() - b.get_x(), a.get_y() - b.get_y()};
 }
 
-int Date::month()
+bool operator==(const Vector &a, const Vector &b)
 {
-    return m; // not the member function, can’t access m
+    return a.get_x() == b.get_x() && a.get_y() == b.get_y();
 }
 
-void Date::print() const
+void print(const Vector &v)
 {
-    cout << d << "/" << m << "/" << y << "\n";
+    std::print("Vector({}, {})\n", v.get_x(), v.get_y());
 }
+
 
 int main()
 {
-    Date today{2026, 5, 5};
-    today.add_day(5);
-    today.print();
+    Vector v1{2, 4};
+    Vector v2{5, 3};
+
+    Vector v3 = v1 + v2;
+
+    // v3.print();
+
+    // std::println("{}", v1 == v2);
+    print(v1 - v2);
 }
