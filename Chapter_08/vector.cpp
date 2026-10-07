@@ -1,36 +1,44 @@
+// Operator overloading with vectors
+// Read and understand the concept of operator overloading
+// Read Chapter 7 to understand the difference between reference and value
+
 import std;
 using namespace std;
 
 class Vector
 {
+    // Private data members
 private:
     int x, y;
 
+    // Public member functions
 public:
     Vector(int x, int y)
         : x{x}, y{y}
     {
     }
+
+    // Constant member functions promises not to modify the object
+    int get_x() const { return x; }
+    int get_y() const { return y; }
 };
 
-Vector operator+(const Vector &other)
+// Overloaded operators
+Vector operator+(const Vector &a, const Vector &b)
 {
-    return Vector{x + other.x, y + other.y};
+    return Vector{a.get_x() + b.get_x(), a.get_y() + b.get_y()};
 }
 
-Vector operator-(const Vector &other)
+Vector operator-(const Vector &a, const Vector &b)
 {
-    return Vector{x - other.x, y - other.y};
+    return Vector{a.get_x() - b.get_x(), a.get_y() - b.get_y()};
 }
 
-bool operator==(const Vector &other)
-{
-    return x == other.x && y == other.y;
-}
+// Overloaded operator for equality comparison
 
-void print()
+void print(const Vector &v)
 {
-    std::print("Vector({}, {})\n", x, y);
+    print("Vector({}, {})\n", v.get_x(), v.get_y());
 }
 
 int main()
@@ -40,9 +48,8 @@ int main()
 
     Vector v3 = v1 + v2;
 
-    // v3.print();
-
-    // std::println("{}", v1 == v2);
-    // print(v3);
     print(v1 - v2);
 }
+
+
+// Operator overloading with vectors

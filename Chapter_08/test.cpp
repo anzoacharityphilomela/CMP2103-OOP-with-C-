@@ -1,54 +1,29 @@
 import std;
+
 using namespace std;
 
-class Vector
+class Circle
 {
-    // Private data members
-private:
-    int x, y;
-
-    // Public member functions
+    double radius; // private data member
 public:
-    Vector(int x, int y)
-        : x{x}, y{y}
-    {
+    Circle(double r); // default constructor
+    double getRadius()
+    { // public member function to access private data member
+        return radius;
     }
 
-    int get_x() const { return x; }
-    int get_y() const { return y; }
+    void setRadius(double r)
+    { // public member function to modify private data member
+        radius = r;
+    }
 };
 
-// Overloaded operators
-Vector operator+(const Vector &a, const Vector &b)
-{
-    return Vector{a.get_x() + b.get_x(), a.get_y() + b.get_y()};
-}
-
-Vector operator-(const Vector &a, const Vector &b)
-{
-    return Vector{a.get_x() - b.get_x(), a.get_y() - b.get_y()};
-}
-
-bool operator==(const Vector &a, const Vector &b)
-{
-    return a.get_x() == b.get_x() && a.get_y() == b.get_y();
-}
-
-void print(const Vector &v)
-{
-    std::print("Vector({}, {})\n", v.get_x(), v.get_y());
-}
-
+Circle::Circle(double r = 1.0) : radius{r} {} // constructor with parameter
 
 int main()
 {
-    Vector v1{2, 4};
-    Vector v2{5, 3};
+    Circle small_circle{};
+    // small_circle.setRadius(5.0); // Set the radius using the public member function
 
-    Vector v3 = v1 + v2;
-
-    // v3.print();
-
-    // std::println("{}", v1 == v2);
-    print(v1 - v2);
+    print("Radius of the circle: {}\n", small_circle.getRadius()); // Get the radius using the public member function
 }
